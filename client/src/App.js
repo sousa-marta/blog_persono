@@ -1,7 +1,15 @@
 import React from 'react';
+import BlogListPage from './pages/BlogList';
+
+import 'bootstrap/dist/css/bootstrap.css';
+
 
 const App = () => {
-  return <div>Criando base da aplicação</div>;
+  return (
+    <>
+      <BlogListPage />
+    </>
+  );
 };
 
 export default App;
