@@ -1,5 +1,5 @@
 import React from 'react';
-import BlogListPage from './pages/BlogList';
+import BlogListPage from './pages/BlogListPage';
 
 import 'bootstrap/dist/css/bootstrap.css';
 
