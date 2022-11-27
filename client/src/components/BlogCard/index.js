@@ -8,7 +8,7 @@ const BlogCard = ({ blogItem }) => {
   return (
     <Card className="mb-3">
       <Card.Title>{blogItem.title}</Card.Title>
-      <small>Por: {blogItem.author} - {blogItem.date }</small>
+      <small>Por: {blogItem.author} - {blogItem.creation_date }</small>
       <Card.Text>{blogItem.description}</Card.Text>
       <Button>{blogItem.category}</Button>
     </Card>

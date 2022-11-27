@@ -1,30 +1,23 @@
 const express = require('express');
-
 const app = express();
+const { DB_CONNECTION } = require('./config/connection');
 
-app.get('/api', (req, res) => {
-  res.json({
-    posts: [
-      {
-        id: 1,
-        title: 'Crie uma rotina de banho para dormir',
-        author: 'Persono',
-        date: '12/10/2022',
-        description:
-          'O banho é um ótimo companheiro para nos acordar pelas manhãs, sobretudo quando começamos o dia bem cedo. Mas ele também pode ser perfeito para encerrar o dia, nos preparando para dormir.',
-        category: 'SONO E CIÊNCIA',
-      },
-      {
-        id: 2,
-        title: 'Crie uma rotina de banho para dormir',
-        author: 'Persono',
-        date: '12/10/2022',
-        description:
-          'O banho é um ótimo companheiro para nos acordar pelas manhãs, sobretudo quando começamos o dia bem cedo. Mas ele também pode ser perfeito para encerrar o dia, nos preparando para dormir.',
-        category: 'SONO E CIÊNCIA',
-      },
-    ],
-  });
+app.get('/api', async (req, res) => {
+  const Client = require('pg').Client;
+  const client = new Client(DB_CONNECTION);
+
+  let result;
+  try {
+    await client.connect();
+    result = await client.query(
+      "SELECT * FROM posts WHERE Title ILIKE '%' || 'crie' || '%' "
+    ); // ILIKE é usadado para deixar a pesquisa "case-insensitive"
+  } catch (error) {
+    console.log(`Ocorreu um erro ao tentar pegar posts do banco. ${error}`);
+  } finally {
+    if (result && result.rows) res.json({ posts: result.rows });
+    await client.end();
+  }
 });
 
 // Inicia backend - escutando porta 5000
