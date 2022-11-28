@@ -1,16 +1,17 @@
 import React from 'react';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
+
+import {Title, Subtitle, Card, Text} from './styles';
+import { Tag } from "../../ui/Tag/styles";
 
 
 const BlogCard = ({ blogItem }) => {
 
   return (
-    <Card className="mb-3">
-      <Card.Title>{blogItem.title}</Card.Title>
-      <small>Por: {blogItem.author} - {blogItem.creation_date }</small>
-      <Card.Text>{blogItem.description}</Card.Text>
-      <Button>{blogItem.category}</Button>
+    <Card>
+      <Title>{blogItem.title}</Title>
+      <Subtitle>Por: {blogItem.author} - {blogItem.creation_date }</Subtitle>
+      <Text>{blogItem.description}</Text>
+      <Tag>{blogItem.category}</Tag>
     </Card>
   );
 };

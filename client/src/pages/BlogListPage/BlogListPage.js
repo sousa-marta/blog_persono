@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-import Container from 'react-bootstrap/Container';
-import BlogCard from '../components/BlogCard';
-import SearchBar from '../components/SearchBar';
+import BlogCard from '../../components/BlogCard';
+import SearchBar from '../../components/SearchBar';
+
+import { Feedback, StyledContainer, Title, PlusIcon } from './styles';
 
 const BlogListPage = () => {
   const [isFetching, setIsFetching] = useState(true);
@@ -20,18 +21,30 @@ const BlogListPage = () => {
       });
   }, []);
 
+  const onCreateClick = () => {
+    alert('open modal');
+  };
+
+
+  const feedbackMessage = () => {
+    //TODO
+  };
 
 
 
   // Exibe 'carregando' enquanto os posts estão sendo buscados no banco
   // Caso não haja posts, exibir mensagem de que 'Não há postagens disponíveis'
   return (
-    <Container>
+    <StyledContainer>
       {isFetching ? (
         <div>Carregando</div>
       ) : (
         <>
           <section>
+            <div className="d-flex justify-content-between align-items-center">
+              <Title>Posts</Title>
+              <PlusIcon onClick={() => onCreateClick()}>+</PlusIcon>
+            </div>
             <SearchBar
               setBlogPosts={setBlogPosts}
               searchInput={searchInput}
@@ -41,11 +54,11 @@ const BlogListPage = () => {
           {blogPosts ? (
             <div>
               <section>
-                <h4>
+                <Feedback>
                   {blogPosts.length
                     ? 'Exibindo todos os posts'
                     : 'Não há postagens disponíveis'}{' '}
-                </h4>
+                </Feedback>
                 <div>
                   {blogPosts.map((each) => (
                     <BlogCard key={each.id} blogItem={each} />
@@ -58,7 +71,7 @@ const BlogListPage = () => {
           )}
         </>
       )}
-    </Container>
+    </StyledContainer>
   );
 };
 

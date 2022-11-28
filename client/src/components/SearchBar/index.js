@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import Form from 'react-bootstrap/Form';
+
+import { InputStyle } from './styles';
 
 const SearchBar = ({ setBlogPosts, searchInput, setSearchInput }) => {
- 
   const [isFetching, setIsFetching] = useState(true);
 
   useEffect(() => {
@@ -23,7 +23,7 @@ const SearchBar = ({ setBlogPosts, searchInput, setSearchInput }) => {
   }, [searchInput]);
 
   return (
-    <Form.Control
+    <InputStyle
       autoFocus
       type="text"
       autoComplete="off"
