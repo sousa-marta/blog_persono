@@ -25,12 +25,45 @@ const BlogListPage = () => {
     alert('open modal');
   };
 
+  // Reenderiza mensagem de feedback para o usuário
+  const FeedbackMessage = () => {
+    const postsCount = blogPosts.length;
 
-  const feedbackMessage = () => {
-    //TODO
+    //Feedbacks da pesquisa
+    if (searchInput) {
+      if (postsCount === 0) {
+        return (
+          <Feedback>
+            <p>Não foram encontrado posts para essa busca</p>
+            <p>Considere adicionar um novo post</p>
+          </Feedback>
+        );
+      } else if (postsCount === 1)
+        return (
+          <Feedback>
+            Exibindo 1 post para: <strong>{searchInput}</strong>
+          </Feedback>
+        );
+      else
+        return (
+          <Feedback>
+            Exibindo {postsCount} posts para: <strong>{searchInput}</strong>
+          </Feedback>
+        );
+    } else {
+
+      if (postsCount === 0) {
+        return (
+          <Feedback>
+            <p>Não foram encontrado posts para essa busca</p>
+            <p>Considere adicionar um novo post</p>
+          </Feedback>
+        );
+      }
+      
+      return <Feedback>Exibindo todos os posts</Feedback>;
+    }
   };
-
-
 
   // Exibe 'carregando' enquanto os posts estão sendo buscados no banco
   // Caso não haja posts, exibir mensagem de que 'Não há postagens disponíveis'
@@ -54,11 +87,7 @@ const BlogListPage = () => {
           {blogPosts ? (
             <div>
               <section>
-                <Feedback>
-                  {blogPosts.length
-                    ? 'Exibindo todos os posts'
-                    : 'Não há postagens disponíveis'}{' '}
-                </Feedback>
+                <FeedbackMessage />
                 <div>
                   {blogPosts.map((each) => (
                     <BlogCard key={each.id} blogItem={each} />

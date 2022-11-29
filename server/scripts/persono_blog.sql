@@ -1,4 +1,4 @@
--- CREATE DATABASE persona_blog 
+-- CREATE DATABASE persono_blog 
 --CREATE TABLE posts (
 --    id int IDENTITY(1, 1) PRIMARY KEY,
 --    title nvarchar(200) NOT NULL,

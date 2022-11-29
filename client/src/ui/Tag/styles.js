@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { colors } from '../../styles/colors';
 
 export const Tag = styled.span`
-  background: ${colors.lightBlue};
+  background: ${colors.lightBlue}  ;
   color: white;
   border-radius: 25px;
   text-transform: uppercase;

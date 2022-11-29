@@ -10,6 +10,6 @@ const DB_CONNECTION = {
   password: 'aqui_vai_sua_senha',
   host: '127.0.0.1',
   port: 5432,
-  database: 'persona_blog',
+  database: 'persono_blog',
 };
 exports.DB_CONNECTION = DB_CONNECTION;
