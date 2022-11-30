@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import { Button } from '../../ui/Button/styles';
-import { SearchBarStyle, InputStyle } from './styles';
+import { SearchBarStyle } from './styles';
+import { InputStyle } from '../../ui/Forms/styles';
 
 const SearchBar = ({ setBlogPosts, searchInput, setSearchInput }) => {
   const [isFetching, setIsFetching] = useState(true);

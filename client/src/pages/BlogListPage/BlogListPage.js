@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import BlogCard from '../../components/BlogCard';
 import SearchBar from '../../components/SearchBar';
+import AddPostModal from '../../components/AddPostModal';
 
 import { Feedback, StyledContainer, Title, PlusIcon } from './styles';
 
@@ -9,7 +10,7 @@ const BlogListPage = () => {
   const [isFetching, setIsFetching] = useState(true);
   const [blogPosts, setBlogPosts] = useState([]);
   const [searchInput, setSearchInput] = useState('');
-  const [resultFromSearch, setResultFromSearch] = useState(false); //todo - para alterar mensagem - pegar
+  const [showModal, setShowModal] = useState(true);
 
   // Busca todos os posts ao iniciar página
   useEffect(() => {
@@ -20,10 +21,6 @@ const BlogListPage = () => {
         setIsFetching(false);
       });
   }, []);
-
-  const onCreateClick = () => {
-    alert('open modal');
-  };
 
   // Reenderiza mensagem de feedback para o usuário
   const FeedbackMessage = () => {
@@ -51,7 +48,6 @@ const BlogListPage = () => {
           </Feedback>
         );
     } else {
-
       if (postsCount === 0) {
         return (
           <Feedback>
@@ -60,7 +56,7 @@ const BlogListPage = () => {
           </Feedback>
         );
       }
-      
+
       return <Feedback>Exibindo todos os posts</Feedback>;
     }
   };
@@ -76,7 +72,7 @@ const BlogListPage = () => {
           <section>
             <div className="d-flex justify-content-between align-items-center">
               <Title>Posts</Title>
-              <PlusIcon onClick={() => onCreateClick()}>+</PlusIcon>
+              <PlusIcon onClick={() => setShowModal(true)}>+</PlusIcon>
             </div>
             <SearchBar
               setBlogPosts={setBlogPosts}
@@ -98,6 +94,8 @@ const BlogListPage = () => {
           ) : (
             <div></div>
           )}
+
+          <AddPostModal showModal={showModal} setShowModal={setShowModal} />
         </>
       )}
     </StyledContainer>

@@ -4,5 +4,7 @@ export const colors = {
   darkGray: '#2c2c2c',
   darkestGray: '#1e1e1e',
 
-  lightBlue: '#80a5e9'
+  lightBlue: '#80a5e9',
+
+  error: 'red'
 }
