@@ -6,5 +6,8 @@ export const colors = {
 
   lightBlue: '#80a5e9',
 
+  button: '#00a8e0',
+  buttonHover: '#008fbf',
+
   error: 'red'
 }

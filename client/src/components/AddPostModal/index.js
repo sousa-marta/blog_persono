@@ -103,7 +103,7 @@ const AddPostModal = ({ showModal, setShowModal }) => {
           {errors.category?.type ==='maxLength' && <Error>Deve ter no máximo 100 caracteres</Error>}
 
           <div className="d-flex justify-content-end my-2">
-            <InputButton type="submit" value="Salvar" />
+            <InputButton type="submit" value="SALVAR" />
           </div>
         </form>
       </Modal.Body>

@@ -9,7 +9,7 @@ export const Card = styled.div`
 `;
 
 export const Title = styled.h1`
-  font-size: 1.5rem;
+  font-size: 1.3rem;
   margin-bottom: 0;
 `;
 
