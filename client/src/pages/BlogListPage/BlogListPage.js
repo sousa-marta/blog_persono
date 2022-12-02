@@ -6,20 +6,31 @@ import AddPostModal from '../../components/AddPostModal';
 
 import { Feedback, StyledContainer, Title, PlusIcon } from './styles';
 
+import { postsServices } from '../../services/postsServices';
+
 const BlogListPage = () => {
   const [isFetching, setIsFetching] = useState(true);
   const [blogPosts, setBlogPosts] = useState([]);
   const [searchInput, setSearchInput] = useState('');
-  const [showModal, setShowModal] = useState(true);
+  const [showModal, setShowModal] = useState(false);
 
   // Busca todos os posts ao iniciar página
   useEffect(() => {
-    fetch('/getposts')
-      .then((res) => res.json())
-      .then((data) => {
-        setBlogPosts(data.posts);
-        setIsFetching(false);
-      });
+    postsServices.getPostsList(
+      (res) => {
+        // if (res.data.success) {
+          setBlogPosts(res.data.posts);
+          setIsFetching(false);
+        // }
+      },
+      (err) => console.log(err)
+    );
+    // fetch('/getposts')
+    //   .then((res) => res.json())
+    //   .then((data) => {
+    //     setBlogPosts(data.posts);
+    //     setIsFetching(false);
+    //   });
   }, []);
 
   // Reenderiza mensagem de feedback para o usuário
