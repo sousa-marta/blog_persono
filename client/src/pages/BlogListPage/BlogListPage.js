@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import BlogCard from '../../components/BlogCard';
 import SearchBar from '../../components/SearchBar';
 import AddPostModal from '../../components/AddPostModal';
+import Alert from '../../components/Alert';
 
 import { Feedback, StyledContainer, Title, PlusIcon } from './styles';
 
@@ -13,24 +14,21 @@ const BlogListPage = () => {
   const [blogPosts, setBlogPosts] = useState([]);
   const [searchInput, setSearchInput] = useState('');
   const [showModal, setShowModal] = useState(false);
+  const [alertConfig, setAlertConfig] = useState({
+    isOpened: false,
+    isSuccess: true,
+    message: ''
+  });
 
   // Busca todos os posts ao iniciar página
   useEffect(() => {
     postsServices.getPostsList(
       (res) => {
-        // if (res.data.success) {
-          setBlogPosts(res.data.posts);
-          setIsFetching(false);
-        // }
+        setBlogPosts(res.data.posts);
+        setIsFetching(false);
       },
       (err) => console.log(err)
     );
-    // fetch('/getposts')
-    //   .then((res) => res.json())
-    //   .then((data) => {
-    //     setBlogPosts(data.posts);
-    //     setIsFetching(false);
-    //   });
   }, []);
 
   // Reenderiza mensagem de feedback para o usuário
@@ -80,6 +78,7 @@ const BlogListPage = () => {
         <div>Carregando</div>
       ) : (
         <>
+          <Alert alertConfig={alertConfig} setAlertConfig={setAlertConfig} />
           <section>
             <div className="d-flex justify-content-between align-items-center">
               <Title>Posts</Title>
@@ -106,7 +105,13 @@ const BlogListPage = () => {
             <div></div>
           )}
 
-          <AddPostModal showModal={showModal} setShowModal={setShowModal} />
+          <AddPostModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            blogPosts={blogPosts}
+            setBlogPosts={setBlogPosts}
+            setAlertConfig={setAlertConfig}
+          />
         </>
       )}
     </StyledContainer>

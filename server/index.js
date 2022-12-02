@@ -1,46 +1,35 @@
 const express = require('express');
-const app = express();
 const bodyParser = require('body-parser');
 const { DB_CONNECTION } = require('./config/connection');
 
+const app = express();
 const jsonParser = bodyParser.json();
+
+const Pool = require('pg').Pool;
+const pool = new Pool(DB_CONNECTION);
 
 app.get('/getposts', async (req, res) => {
   //Pegando parâmetro de busca da query
   const { searchInput } = req.query;
 
   //Caso usuário tenha digitado no campo de busca, filtrar por ele. Caso contrário, exibir todos itens do blog
+  // ILIKE é usadado para deixar a pesquisa "case-insensitive"
   const queryString = searchInput
-    ? `SELECT * FROM posts WHERE Title ILIKE '%${searchInput}%' `
-    : 'SELECT * FROM posts';
-
-  const Client = require('pg').Client;
-  const client = new Client(DB_CONNECTION);
+    ? `SELECT * FROM posts WHERE Title ILIKE '%${searchInput}%' ORDER BY id DESC`
+    : 'SELECT * FROM posts ORDER BY id DESC';
 
   let result;
   try {
-    await client.connect();
-    result = await client.query(queryString); // ILIKE é usadado para deixar a pesquisa "case-insensitive"
+    result = await pool.query(queryString);
   } catch (error) {
     console.log(`Ocorreu um erro ao tentar pegar posts do banco. ${error}`);
   } finally {
     if (result && result.rows) res.json({ posts: result.rows });
-    await client.end();
   }
 });
 
 app.post('/insertpost', jsonParser, async (req, res) => {
-  const receivedData = req.body;
-
-  console.log('receivedData', receivedData);
-
-  const { title, author, description, category } = receivedData;
-
-  //falta creation_date
-  // const dateNow = new Date().toISOString();
-
-  const Pool = require('pg').Pool;
-  const pool = new Pool(DB_CONNECTION);
+  const { title, author, description, category } = req.body;
 
   pool.query(
     'INSERT INTO posts (title, author, description, category) VALUES ($1, $2, $3, $4) RETURNING *',
@@ -49,22 +38,10 @@ app.post('/insertpost', jsonParser, async (req, res) => {
       if (error) {
         throw error;
       }
-      res.status(201).send(`User added with ID: ${results.rows[0].id}`);
+      //Retorna id da linha criada
+      res.json(results.rows[0].id);
     }
   );
-
-  // let result;
-  // try {
-  //   await client.connect();
-  //   result = await client.query(queryString); // ILIKE é usadado para deixar a pesquisa "case-insensitive"
-  // } catch (error) {
-  //   console.log(`Ocorreu um erro ao tentar pegar posts do banco. ${error}`);
-  // } finally {
-  //   if (result && result.rows) res.json({ posts: result.rows });
-  //   await client.end();
-  // }
-
-  // res.json(data)
 });
 
 // Inicia backend - escutando porta 5000

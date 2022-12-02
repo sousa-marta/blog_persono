@@ -11,9 +11,9 @@ import FloatingLabel from 'react-bootstrap/FloatingLabel';
 
 import { postsServices } from '../../services/postsServices';
 
+import { date_today } from '../../utils/date_today';
 
-
-const AddPostModal = ({ showModal, setShowModal }) => {
+const AddPostModal = ({ showModal, setShowModal, blogPosts, setBlogPosts, setAlertConfig }) => {
   const {
     register,
     handleSubmit,
@@ -23,18 +23,38 @@ const AddPostModal = ({ showModal, setShowModal }) => {
   const handleClose = () => setShowModal(false);
 
   const onSubmit = (data) => {
+    postsServices.insertPost(
+      data,
+      (res) => {
+        console.log('response:', res);
 
-    postsServices.insertPost(data, res => {
+        setBlogPosts([
+          {
+            id: res.data,
+            title: data.title,
+            author: data.author,
+            creation_date: date_today(),
+            description: data.description,
+            category: data.category,
+          },
+          ...blogPosts,
+        ]);
 
-      console.log('response:', res);
-
-      // if (res.data.success) {
-     
-      // } else { }
-
-    }, (err) => {
-        console.log("error catch", err);
-    });
+        setAlertConfig({
+          isOpened: true,
+          isSuccess: true,
+          message: 'Post adicionado com sucesso!',
+        });
+      },
+      (err) => {
+        setAlertConfig({
+          isOpened: true,
+          isSuccess: false,
+          message: 'Ocorreu um erro ao tentar adicionar o post. Tente novamente mais tarde',
+        });
+        console.log('error catch', err);
+      }
+    );
 
     handleClose();
   };
