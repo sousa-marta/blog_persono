@@ -102,7 +102,7 @@ const BlogListPage = () => {
               </section>
             </div>
           ) : (
-            <div></div>
+            <div>Não há postagens disponíveis. Adicione um novo post</div>
           )}
 
           <AddPostModal

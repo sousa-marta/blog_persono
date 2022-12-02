@@ -8,15 +8,23 @@ import { InputButton } from '../../ui/Button/styles';
 import { Error } from '../../ui/Forms/styles';
 import Form from 'react-bootstrap/Form';
 import FloatingLabel from 'react-bootstrap/FloatingLabel';
+import CloseButton from 'react-bootstrap/CloseButton';
 
 import { postsServices } from '../../services/postsServices';
 
 import { date_today } from '../../utils/date_today';
 
-const AddPostModal = ({ showModal, setShowModal, blogPosts, setBlogPosts, setAlertConfig }) => {
+const AddPostModal = ({
+  showModal,
+  setShowModal,
+  blogPosts,
+  setBlogPosts,
+  setAlertConfig,
+}) => {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm();
 
@@ -45,12 +53,16 @@ const AddPostModal = ({ showModal, setShowModal, blogPosts, setBlogPosts, setAle
           isSuccess: true,
           message: 'Post adicionado com sucesso!',
         });
+
+        //Limpa formulário caso sucesso
+        reset();
       },
       (err) => {
         setAlertConfig({
           isOpened: true,
           isSuccess: false,
-          message: 'Ocorreu um erro ao tentar adicionar o post. Tente novamente mais tarde',
+          message:
+            'Ocorreu um erro ao tentar adicionar o post. Tente novamente mais tarde',
         });
         console.log('error catch', err);
       }
@@ -65,7 +77,7 @@ const AddPostModal = ({ showModal, setShowModal, blogPosts, setBlogPosts, setAle
       <Modal.Header>
         <h3 className="mb-0">Adicionar novo post</h3>
         <span className="close" onClick={() => handleClose()}>
-          x
+          <CloseButton variant="white" />
         </span>
       </Modal.Header>
       <Modal.Body>

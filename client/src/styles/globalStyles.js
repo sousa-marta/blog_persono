@@ -52,8 +52,10 @@ const GlobalStyle = createGlobalStyle`
     border-bottom:none;
   }
   .modal-header .close {
+    display: flex;
+    align-items: center;
     color: white !important;
-    font-size: 1.5rem;
+    font-size: 1rem;
     &:hover {
       color: ${colors.lightGray} !important;
       cursor: pointer;
