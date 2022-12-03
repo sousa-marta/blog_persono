@@ -80,11 +80,13 @@ const AddPostModal = ({
           <CloseButton variant="white" />
         </span>
       </Modal.Header>
+
       <Modal.Body>
         <form onSubmit={handleSubmit(onSubmit)}>
           <FloatingLabel controlId="floatingInput" label="Título">
             <Form.Control
               placeholder="Título"
+              type="text"
               {...register('title', {
                 required: true,
                 minLength: 2,
@@ -104,11 +106,12 @@ const AddPostModal = ({
 
           <FloatingLabel
             controlId="floatingInput"
-            label="Autor"
+            label="Nome do autor"
             className="mt-3"
           >
             <Form.Control
               placeholder="Autor"
+              type="text"
               {...register('author', {
                 required: true,
                 minLength: 2,
@@ -128,11 +131,12 @@ const AddPostModal = ({
 
           <FloatingLabel
             controlId="floatingInput"
-            label="Descrição"
+            label="Corpo da postagem"
             className="mt-3"
           >
             <Form.Control
               placeholder="Descrição"
+              type="text"
               as="textarea"
               {...register('description', {
                 required: true,
@@ -158,6 +162,7 @@ const AddPostModal = ({
           >
             <Form.Control
               placeholder="Categoria"
+              type="text"
               {...register('category', {
                 required: true,
                 minLength: 4,
