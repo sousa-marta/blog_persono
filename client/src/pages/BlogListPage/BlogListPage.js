@@ -4,8 +4,13 @@ import BlogCard from '../../components/BlogCard';
 import SearchBar from '../../components/SearchBar';
 import AddPostModal from '../../components/AddPostModal';
 import Alert from '../../components/Alert';
+import Loading from '../../components/Loading';
 
 import { Feedback, StyledContainer, Title, PlusIcon } from './styles';
+import { Link } from '../../ui/Link/styles';
+
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import { postsServices } from '../../services/postsServices';
 
@@ -17,7 +22,7 @@ const BlogListPage = () => {
   const [alertConfig, setAlertConfig] = useState({
     isOpened: false,
     isSuccess: true,
-    message: ''
+    message: '',
   });
 
   // Busca todos os posts ao iniciar página
@@ -41,7 +46,16 @@ const BlogListPage = () => {
         return (
           <Feedback>
             <p>Não foram encontrado posts para essa busca</p>
-            <p>Considere adicionar um novo post</p>
+            <p>
+              Considere adicionar{' '}
+              <Link
+                onClick={() => {
+                  setShowModal(true);
+                }}
+              >
+                um novo post
+              </Link>
+            </p>
           </Feedback>
         );
       } else if (postsCount === 1)
@@ -61,7 +75,16 @@ const BlogListPage = () => {
         return (
           <Feedback>
             <p>Não foram encontrado posts para essa busca</p>
-            <p>Considere adicionar um novo post</p>
+            <p>
+              Considere adicionar{' '}
+              <Link
+                onClick={() => {
+                  setShowModal(true);
+                }}
+              >
+                um novo post
+              </Link>
+            </p>
           </Feedback>
         );
       }
@@ -70,12 +93,12 @@ const BlogListPage = () => {
     }
   };
 
-  // Exibe 'carregando' enquanto os posts estão sendo buscados no banco
+  // Exibe spinner de carregamento enquanto os posts estão sendo buscados no banco
   // Caso não haja posts, exibir mensagem de que 'Não há postagens disponíveis'
   return (
     <StyledContainer>
       {isFetching ? (
-        <div>Carregando</div>
+        <Loading />
       ) : (
         <>
           <Alert alertConfig={alertConfig} setAlertConfig={setAlertConfig} />
@@ -94,11 +117,13 @@ const BlogListPage = () => {
             <div>
               <section>
                 <FeedbackMessage />
-                <div>
+                <Row>
                   {blogPosts.map((each) => (
-                    <BlogCard key={each.id} blogItem={each} />
+                    <Col lg="6" xxl="4">
+                      <BlogCard key={each.id} blogItem={each} />
+                    </Col>
                   ))}
-                </div>
+                </Row>
               </section>
             </div>
           ) : (
