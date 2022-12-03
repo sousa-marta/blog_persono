@@ -71,7 +71,7 @@ const AddPostModal = ({
 
   // Obs: o número máximo de caracteres e o mesmo máximo para coluna do banco
   return (
-    <Modal show={showModal} onHide={handleClose} backdrop="static" size="md">
+    <Modal show={showModal} onHide={handleClose} backdrop="static" size="lg">
       <Modal.Header>
         <h3 className="mb-0">Adicionar novo post</h3>
         <span className="close" onClick={() => handleClose()}>
