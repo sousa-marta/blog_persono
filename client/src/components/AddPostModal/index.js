@@ -34,8 +34,6 @@ const AddPostModal = ({
     postsServices.insertPost(
       data,
       (res) => {
-        console.log('response:', res);
-
         setBlogPosts([
           {
             id: res.data,

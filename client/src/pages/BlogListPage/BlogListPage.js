@@ -9,6 +9,7 @@ import Loading from '../../components/Loading';
 import { Feedback, Title, PlusIcon } from './styles';
 import { Link } from '../../ui/Link/styles';
 
+import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -99,7 +100,7 @@ const BlogListPage = () => {
       {isFetching ? (
         <Loading />
       ) : (
-        <>
+        <Container>
           <Alert alertConfig={alertConfig} setAlertConfig={setAlertConfig} />
           <section>
             <div className="d-flex justify-content-between align-items-center">
@@ -118,8 +119,8 @@ const BlogListPage = () => {
                 <FeedbackMessage />
                 <Row>
                   {blogPosts.map((each) => (
-                    <Col lg="6" xxl="4">
-                      <BlogCard key={each.id} blogItem={each} />
+                    <Col lg="6" xxl="4" key={each.id}>
+                      <BlogCard blogItem={each} />
                     </Col>
                   ))}
                 </Row>
@@ -136,7 +137,7 @@ const BlogListPage = () => {
             setBlogPosts={setBlogPosts}
             setAlertConfig={setAlertConfig}
           />
-        </>
+        </Container>
       )}
     </>
   );
