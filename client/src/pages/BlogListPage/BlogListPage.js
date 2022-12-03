@@ -6,7 +6,7 @@ import AddPostModal from '../../components/AddPostModal';
 import Alert from '../../components/Alert';
 import Loading from '../../components/Loading';
 
-import { Feedback, StyledContainer, Title, PlusIcon } from './styles';
+import { Feedback, Title, PlusIcon } from './styles';
 import { Link } from '../../ui/Link/styles';
 
 import Row from 'react-bootstrap/Row';
@@ -94,9 +94,8 @@ const BlogListPage = () => {
   };
 
   // Exibe spinner de carregamento enquanto os posts estão sendo buscados no banco
-  // Caso não haja posts, exibir mensagem de que 'Não há postagens disponíveis'
   return (
-    <StyledContainer>
+    <>
       {isFetching ? (
         <Loading />
       ) : (
@@ -139,7 +138,7 @@ const BlogListPage = () => {
           />
         </>
       )}
-    </StyledContainer>
+    </>
   );
 };
 

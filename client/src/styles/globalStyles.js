@@ -5,9 +5,6 @@ import { colors } from './colors';
 import LatoRegularWoff2 from '../assets/fonts/Lato-Regular.woff2';
 import LatoRegularWoff from '../assets/fonts/Lato-Regular.woff';
 import LatoRegularTTf from '../assets/fonts/Lato-Regular.ttf';
-
-import LatoSemiBoldTTf from '../assets/fonts/Lato-Bold.ttf';
-
 import LatoBoldTTf from '../assets/fonts/Lato-Bold.ttf';
 
 const GlobalStyle = createGlobalStyle`
@@ -30,7 +27,6 @@ const GlobalStyle = createGlobalStyle`
     font-family: LatoBold;
     src: url(${LatoBoldTTf})
   }
-
  
 
   body {

@@ -8,6 +8,8 @@ const jsonParser = bodyParser.json();
 const Pool = require('pg').Pool;
 const pool = new Pool(DB_CONNECTION);
 
+
+//Listagem de posts
 app.get('/getposts', async (req, res) => {
   //Pegando parâmetro de busca da query
   const { searchInput } = req.query;
@@ -28,6 +30,8 @@ app.get('/getposts', async (req, res) => {
   }
 });
 
+
+//Adicionar novo post
 app.post('/insertpost', jsonParser, async (req, res) => {
   const { title, author, description, category } = req.body;
 
@@ -43,6 +47,8 @@ app.post('/insertpost', jsonParser, async (req, res) => {
     }
   );
 });
+
+
 
 // Inicia backend - escutando porta 5000
 app.listen(5000, () => {

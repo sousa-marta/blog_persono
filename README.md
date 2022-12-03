@@ -122,7 +122,7 @@ As seguintes ferramentas foram usadas na construção do projeto:
 
 ## Licença
 
-Este projeto esta sobe a licença [MIT](./LICENSE).
+Este projeto esta sobe a licença [MIT]
 
 Feito com ❤️ por Marta Sousa [Entre em contato pelo LinkedIn!](https://www.linkedin.com/in/martadearaujosousa/)
 

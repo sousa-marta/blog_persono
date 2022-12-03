@@ -6,8 +6,6 @@ import {Title, Subtitle, Card, Text} from './styles';
 import { Tag } from "../../ui/Tag/styles";
 
 
-
-
 const BlogCard = ({ blogItem }) => {
 
   return (

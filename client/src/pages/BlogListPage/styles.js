@@ -1,13 +1,6 @@
 import styled from 'styled-components';
-
-import Container from 'react-bootstrap/Container';
 import { colors } from '../../styles/colors';
 
-
-
-export const StyledContainer = styled(Container)`
-
-`;
 
 export const Title = styled.h1`
   margin: 1.2rem 0 1.2rem 0;
